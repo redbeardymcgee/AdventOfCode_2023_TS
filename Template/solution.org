@@ -1,19 +1,32 @@
+#+BEGIN_SRC typescript :tangle solution.ts
 import { describe, expect, test } from "vitest";
 import { readData } from "../utils";
+#+END_SRC
 
+#+NAME: sample
+#+BEGIN_SRC typescript :tangle solution.ts
 const sample: string[] = `
 `
   .trim()
   .split("\n");
+#+END_SRC
 
+#+NAME: part1
+#+BEGIN_SRC typescript :tangle solution.ts
 function part1(input: string[]): number {
   return 0;
 }
+#+END_SRC
 
+#+NAME: part2
+#+BEGIN_SRC typescript :tangle solution.ts
 function part2(input: string[]): number {
   return 0;
 }
+#+END_SRC
 
+#+NAME: tests
+#+BEGIN_SRC typescript :tangle solution.ts
 describe("Day ", () => {
   const input = readData(__dirname);
 
@@ -27,3 +40,4 @@ describe("Day ", () => {
     expect(part2(input)).toBe(0);
   });
 });
+#+END_SRC
