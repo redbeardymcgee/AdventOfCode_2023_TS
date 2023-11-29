@@ -1,5 +1,5 @@
-import {readData} from '../utils'
-import {isEmpty} from 'lodash'
+import { readData } from "../utils";
+import { isEmpty } from "lodash";
 
 const sample: string[] = `
 1000
@@ -16,66 +16,70 @@ const sample: string[] = `
 9000
 
 10000
-`.trim().split('\n')
+`
+  .trim()
+  .split("\n");
 
 function part1(input: string[]): number {
-    let max = 0
-    let elf = 0
-    for (const l of input) {
-        if (l) {
-            elf += parseInt(l, 10)
-        } else {
-            if (elf > max) {
-                max = elf
-            }
-            elf = 0
-        }
+  let max = 0;
+  let elf = 0;
+  for (const l of input) {
+    if (l) {
+      elf += parseInt(l, 10);
+    } else {
+      if (elf > max) {
+        max = elf;
+      }
+      elf = 0;
     }
-    return max
+  }
+  return max;
 }
 
 function part2(input: string[]): number {
-    const add = (acc: number, n: number): number => acc + n
-    const toInt = (n: string): number => parseInt(n, 10)
-    const descending = (n1: number, n2: number) => n2 - n1
+  const add = (acc: number, n: number): number => acc + n;
+  const toInt = (n: string): number => parseInt(n, 10);
+  const descending = (n1: number, n2: number) => n2 - n1;
 
-    return input.chunkedBy(isEmpty)
-        .map((l) => l.map(toInt).reduce(add, 0))
-        .sort(descending)
-        .slice(0, 3)
-        .reduce(add)
+  return input
+    .chunkedBy(isEmpty)
+    .map((l) => l.map(toInt).reduce(add, 0))
+    .sort(descending)
+    .slice(0, 3)
+    .reduce(add);
 }
 
 function part1_2(input: string[], top: number): number {
-    const add = (acc: number, n: number): number => acc + n
-    const toInt = (n: string): number => parseInt(n, 10)
-    const descending = (n1: number, n2: number) => n2 - n1
+  const add = (acc: number, n: number): number => acc + n;
+  const toInt = (n: string): number => parseInt(n, 10);
+  const descending = (n1: number, n2: number) => n2 - n1;
 
-    return input.chunkedBy(isEmpty)
-        .map((l) => l.map(toInt).reduce(add, 0))
-        .sort(descending)
-        .slice(0, top)
-        .reduce(add)
+  return input
+    .chunkedBy(isEmpty)
+    .map((l) => l.map(toInt).reduce(add, 0))
+    .sort(descending)
+    .slice(0, top)
+    .reduce(add);
 }
 
-describe('Day 1', () => {
-    const input = readData(__dirname)
+describe("Day 1", () => {
+  const input = readData(__dirname);
 
-    it('part 1', () => {
-        expect(part1(sample)).toBe(24000)
-        expect(part1(input)).toBe(67027)
-    })
+  it("part 1", () => {
+    expect(part1(sample)).toBe(24000);
+    expect(part1(input)).toBe(67027);
+  });
 
-    it('part 2', () => {
-        expect(part2(sample)).toBe(45000)
-        expect(part2(input)).toBe(197291)
-    })
+  it("part 2", () => {
+    expect(part2(sample)).toBe(45000);
+    expect(part2(input)).toBe(197291);
+  });
 
-    it('combined', () => {
-        expect(part1_2(input, 1)).toBe(67027)
-        expect(part1_2(input, 3)).toBe(197291)
-    })
-})
+  it("combined", () => {
+    expect(part1_2(input, 1)).toBe(67027);
+    expect(part1_2(input, 3)).toBe(197291);
+  });
+});
 
 /*
 
