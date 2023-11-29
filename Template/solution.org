@@ -1,4 +1,4 @@
-#+PROPERTY: header-args tangle: solution.ts
+#+PROPERTY: header-args :tangle solution.ts
 
 #+NAME: imports
 #+BEGIN_SRC typescript
