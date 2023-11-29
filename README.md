@@ -10,7 +10,7 @@ tests for executing the code and capturing the expected answer. Thus, to solve a
 instructions by replacing `2023/Day01` with the correct year and day:
 
 1. Copy the `Template` directory to `2023/Day01`
-2. Download the input file the day and store it in `2023/Day01/input`
+2. Download the input file for the day and store it in `2023/Day01/input`
 3. Add your solution for part 1 to `2023/Day01/solution.org`
 4. `org-babel-tangle` the file to output `2023/Day01/solution.ts`
 4. Submit the correct answer for part 1 to [AoC]
