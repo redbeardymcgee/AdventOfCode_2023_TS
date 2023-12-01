@@ -1,10 +1,13 @@
 #+PROPERTY: header-args :tangle solution.ts :comments link
 
+* Imports
 #+NAME: imports
 #+BEGIN_SRC typescript
 import { readData } from '../utils'
 #+END_SRC
 
+
+* Sample Inputs
 #+NAME: sample1
 #+BEGIN_SRC typescript
 const sample1: string[] = `1abc2
@@ -30,20 +33,30 @@ zoneight234
   .split('\n')
 #+END_SRC
 
-On each line, the calibration value can be found by combining the first digit and the last digit (in that order) to form a single two-digit number.
+* Part 1
+On each line, the calibration value can be found by combining the first digit
+and the last digit (in that order) to form a single two-digit number.
 
 #+NAME: part1
 #+BEGIN_SRC typescript
 function part1(input: string[]): number {
-  const foobar = input.reduce((sum, line) => {
+  return input.reduce((sum, line) => {
     const digits = line.split('').filter((c) => /\d/.test(c))
     return sum + Number(digits[0] + digits.at(-1))
   }, 0)
-  return foobar
 }
 #+END_SRC
 
-It looks like some of the digits are actually spelled out with letters: one, two, three, four, five, six, seven, eight, and nine also count as valid "digits".
+* Part 2
+It looks like some of the digits are actually spelled out with letters: one,
+two, three, four, five, six, seven, eight, and nine also count as valid
+"digits".
+
+The edge case for this input was overlapping words. I chose to take the first
+matched number, and then find the last number by matching in mirrored mode. For
+the given input, this avoids any overlapping words. This would not work in a
+fully generalized case, but it's highly unlikely that any set of desired matches
+would be large enough to include overlap in both directions.
 
 #+NAME: part2
 #+BEGIN_SRC typescript
@@ -82,6 +95,7 @@ function part2(input: string[]): number {
 }
 #+END_SRC
 
+* Tests
 #+NAME: tests
 #+BEGIN_SRC typescript
 describe('Day ', () => {

@@ -20,11 +20,10 @@ zoneight234
   .split('\n')
 
 function part1(input: string[]): number {
-  const foobar = input.reduce((sum, line) => {
+  return input.reduce((sum, line) => {
     const digits = line.split('').filter((c) => /\d/.test(c))
     return sum + Number(digits[0] + digits.at(-1))
   }, 0)
-  return foobar
 }
 
 function part2(input: string[]): number {
