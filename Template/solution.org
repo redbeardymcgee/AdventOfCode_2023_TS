@@ -2,13 +2,20 @@
 
 #+NAME: imports
 #+BEGIN_SRC typescript
-import { describe, expect, test } from "vitest";
 import { readData } from "../utils";
 #+END_SRC
 
-#+NAME: sample
+#+NAME: sample1
 #+BEGIN_SRC typescript
-const sample: string[] = `
+const sample1: string[] = `
+`
+  .trim()
+  .split("\n");
+#+END_SRC
+
+#+NAME: sample2
+#+BEGIN_SRC typescript
+const sample2: string[] = `
 `
   .trim()
   .split("\n");
@@ -34,12 +41,12 @@ describe("Day ", () => {
   const input = readData(__dirname);
 
   test("part 1", () => {
-    expect(part1(sample)).toBe(0);
+    expect(part1(sample1)).toBe(0);
     expect(part1(input)).toBe(0);
   });
 
   test("part 2", () => {
-    expect(part2(sample)).toBe(0);
+    expect(part2(sample2)).toBe(0);
     expect(part2(input)).toBe(0);
   });
 });
