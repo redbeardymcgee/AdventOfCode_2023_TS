@@ -5,6 +5,6 @@ const config = {
   singleQuote: true,
   jsxSingleQuote: true,
   singleAttributePerLine: true,
-};
+}
 
-export default config;
+export default config

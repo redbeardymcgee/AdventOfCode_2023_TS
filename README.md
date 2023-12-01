@@ -13,9 +13,9 @@ instructions by replacing `2023/Day01` with the correct year and day:
 2. Download the input file for the day and store it in `2023/Day01/input`
 3. Add your solution for part 1 to `2023/Day01/solution.org`
 4. `org-babel-tangle` the file to output `2023/Day01/solution.ts`
-4. Submit the correct answer for part 1 to [AoC]
-5. Repeat steps 2 through 4 for part 2
-6. Enjoy!
+5. Submit the correct answer for part 1 to [AoC]
+6. Repeat steps 2 through 4 for part 2
+7. Enjoy!
 
 ## Setup
 
