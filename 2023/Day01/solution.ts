@@ -20,9 +20,9 @@ zoneight234
   .split('\n')
 
 function part1(input: string[]): number {
-  const foobar = input.reduce((acc, line) => {
+  const foobar = input.reduce((sum, line) => {
     const digits = line.split('').filter((c) => /\d/.test(c))
-    return acc + Number(digits[0] + digits[digits.length - 1])
+    return sum + Number(digits[0] + digits.at(-1))
   }, 0)
   return foobar
 }
@@ -40,30 +40,37 @@ function part2(input: string[]): number {
     ['nine', '9'],
     ['zero', '0'],
   ])
-  const regexp = /\d|one|two|three|four|five|six|seven|eight|nine|zero/g
-  return input.reduce((acc, line) => {
-    const digits = [...line.matchAll(regexp)]
-    const parts = [digits[0][0], digits.at(-1)[0]].map((num) => {
+  const forward = /\d|one|two|three|four|five|six|seven|eight|nine|zero/
+  const reverse = /\d|eno|owt|eerht|ruof|evif|xis|neves|thgie|enin|orez/
+
+  return input.reduce((sum, line) => {
+    const fst = line.match(forward).at(0)
+    const snd = line
+      .split('')
+      .reverse()
+      .join('')
+      .match(reverse)
+      .at(0)
+      .split('')
+      .reverse()
+      .join('')
+    const nums = [fst, snd].map((num) => {
       return /\d/.test(num) ? num : numbers.get(num)
     })
-    return acc + Number(parts[0] + parts[1])
+    return sum + Number(nums.join(''))
   }, 0)
 }
 
-console.log(`s1 === ${part2(sample1)}`)
-console.log(`s2 === ${part2(sample2)}`)
-console.log(`input === ${part2(readData(__dirname))}`)
+describe('Day ', () => {
+  const input = readData(__dirname)
 
-// describe("Day ", () => {
-//   const input = readData(__dirname)
+  test('part 1', () => {
+    expect(part1(sample1)).toBe(142)
+    expect(part1(input)).toBe(54159)
+  })
 
-//   test("part 1", () => {
-//     expect(part1(sample1)).toBe(142)
-//     expect(part1(input)).toBe(54159)
-//   })
-
-//   test("part 2", () => {
-//     expect(part2(sample2)).toBe(281)
-//     expect(part2(input)).toBe(0)
-//   })
-// })
+  test('part 2', () => {
+    expect(part2(sample2)).toBe(281)
+    expect(part2(input)).toBe(53866)
+  })
+})
