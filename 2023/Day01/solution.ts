@@ -6,7 +6,7 @@ a1b2c3d4e5f
 treb7uchet
 `
   .trim()
-  .split("\n")
+  .split('\n')
 
 const sample2: string[] = `two1nine
 eightwothree
@@ -17,7 +17,7 @@ zoneight234
 7pqrstsixteen
 `
   .trim()
-  .split("\n")
+  .split('\n')
 
 function part1(input: string[]): number {
   const foobar = input.reduce((acc, line) => {
@@ -46,13 +46,13 @@ function part2(input: string[]): number {
     const parts = [digits[0][0], digits.at(-1)[0]].map((num) => {
       return /\d/.test(num) ? num : numbers.get(num)
     })
-    console.log(parts[0] + parts[1])
     return acc + Number(parts[0] + parts[1])
   }, 0)
 }
 
 console.log(`s1 === ${part2(sample1)}`)
 console.log(`s2 === ${part2(sample2)}`)
+console.log(`input === ${part2(readData(__dirname))}`)
 
 // describe("Day ", () => {
 //   const input = readData(__dirname)
