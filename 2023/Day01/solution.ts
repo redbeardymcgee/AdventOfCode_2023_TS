@@ -1,5 +1,14 @@
-import { readData } from '../utils'
+// Imports
+// #+NAME: imports
 
+// [[file:solution.org::imports][imports]]
+import { readData } from '../utils'
+// imports ends here
+
+// Sample Inputs
+// #+NAME: sample1
+
+// [[file:solution.org::sample1][sample1]]
 const sample1: string[] = `1abc2
 pqr3stu8vwx
 a1b2c3d4e5f
@@ -7,7 +16,13 @@ treb7uchet
 `
   .trim()
   .split('\n')
+// sample1 ends here
 
+
+
+// #+NAME: sample2
+
+// [[file:solution.org::sample2][sample2]]
 const sample2: string[] = `two1nine
 eightwothree
 abcone2threexyz
@@ -18,14 +33,41 @@ zoneight234
 `
   .trim()
   .split('\n')
+// sample2 ends here
 
+// Part 1
+// #+BEGIN_QUOTE
+// On each line, the calibration value can be found by combining the first digit
+// and the last digit (in that order) to form a single two-digit number.
+// #+END_QUOTE
+
+// #+NAME: part1
+
+// [[file:solution.org::part1][part1]]
 function part1(input: string[]): number {
   return input.reduce((sum, line) => {
     const digits = line.split('').filter((c) => /\d/.test(c))
     return sum + Number(digits[0] + digits.at(-1))
   }, 0)
 }
+// part1 ends here
 
+// Part 2
+// #+BEGIN_QUOTE
+// It looks like some of the digits are actually spelled out with letters: one,
+// two, three, four, five, six, seven, eight, and nine also count as valid
+// "digits".
+// #+END_QUOTE
+
+// The edge case for this input was overlapping words. I chose to take the first
+// matched number, and then find the last number by matching in mirrored mode. For
+// the given input, this avoids any overlapping words. This would not work in a
+// fully generalized case, but it's highly unlikely that any set of desired matches
+// would be large enough to include overlap in both directions.
+
+// #+NAME: part2
+
+// [[file:solution.org::part2][part2]]
 function part2(input: string[]): number {
   const numbers = new Map([
     ['one', '1'],
@@ -59,7 +101,12 @@ function part2(input: string[]): number {
     return sum + Number(nums.join(''))
   }, 0)
 }
+// part2 ends here
 
+// Tests
+// #+NAME: tests
+
+// [[file:solution.org::tests][tests]]
 describe('Day ', () => {
   const input = readData(__dirname)
 
@@ -73,3 +120,4 @@ describe('Day ', () => {
     expect(part2(input)).toBe(53866)
   })
 })
+// tests ends here

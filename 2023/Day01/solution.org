@@ -1,4 +1,4 @@
-#+PROPERTY: header-args :tangle solution.ts :comments link
+#+PROPERTY: header-args :tangle solution.ts :comments both
 
 * Imports
 #+NAME: imports
@@ -34,8 +34,10 @@ zoneight234
 #+END_SRC
 
 * Part 1
+#+BEGIN_QUOTE
 On each line, the calibration value can be found by combining the first digit
 and the last digit (in that order) to form a single two-digit number.
+#+END_QUOTE
 
 #+NAME: part1
 #+BEGIN_SRC typescript
@@ -48,9 +50,11 @@ function part1(input: string[]): number {
 #+END_SRC
 
 * Part 2
+#+BEGIN_QUOTE
 It looks like some of the digits are actually spelled out with letters: one,
 two, three, four, five, six, seven, eight, and nine also count as valid
 "digits".
+#+END_QUOTE
 
 The edge case for this input was overlapping words. I chose to take the first
 matched number, and then find the last number by matching in mirrored mode. For
