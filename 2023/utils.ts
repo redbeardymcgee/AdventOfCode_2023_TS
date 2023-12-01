@@ -24,4 +24,4 @@ Array.prototype.chunkedBy = function <T>(
 }
 
 export const readData = (dir: string): string[] =>
-  fs.readFileSync(path.join(dir, 'input'), 'utf8').split('\n')
+  fs.readFileSync(path.join(dir, 'input'), 'utf8').trim().split('\n')
