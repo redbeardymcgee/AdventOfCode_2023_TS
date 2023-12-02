@@ -79,7 +79,6 @@ function part2(input: string[]): number {
     ['seven', '7'],
     ['eight', '8'],
     ['nine', '9'],
-    ['zero', '0'],
   ])
   const forward = /\d|one|two|three|four|five|six|seven|eight|nine/
   const reverse = /\d|eno|owt|eerht|ruof|evif|xis|neves|thgie|enin/
@@ -126,22 +125,21 @@ function part2b(input: string[]): number {
     ['seven', '7'],
     ['eight', '8'],
     ['nine', '9'],
-    ['zero', '0'],
   ])
   return input.reduce((sum, line) => {
-    let matches = []
+    let output = []
     for (let idx = 0; idx < line.length; idx++) {
       if (/\d/.test(line.at(idx))) {
-        matches.push(line.charAt(idx))
+        output.push(line.charAt(idx))
         continue
       }
       for (const pair of numbers) {
         if (line.substring(idx).startsWith(pair.at(0))) {
-          matches.push(numbers.get(pair.at(0)))
+          output.push(numbers.get(pair.at(0)))
         }
       }
     }
-    return sum + Number(matches.at(0) + matches.at(-1))
+    return sum + Number(output.at(0) + output.at(-1))
   }, 0)
 }
 // part2b ends here
