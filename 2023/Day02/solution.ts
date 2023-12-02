@@ -2,21 +2,22 @@
 // #+NAME: imports
 
 // [[file:solution.org::imports][imports]]
-import { readData } from "../utils";
+import { readData } from '../utils'
 // imports ends here
 
 // Sample Inputs
 // #+NAME: sample1
 
 // [[file:solution.org::sample1][sample1]]
-const sample1: string[] = `Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
+const sample1: string[] =
+  `Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
 Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
 Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
 Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
 Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green
 `
-  .trim()
-  .split("\n");
+    .trim()
+    .split('\n')
 // sample1 ends here
 
 // Part 1
@@ -42,15 +43,6 @@ Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green
 // once. If you add up the IDs of the games that would have been possible, you
 // get 8.
 // #+END_QUOTE
-
-// I spent an embarrassing amount of time morping this input from lines to an
-// object, where each Game ID is a key whose value is an array of rounds keyed by
-// the cube colors.
-
-// Traverse the Games object. In each Game, check for valid hands by comparing the
-// amount of each color against the amount of in `validCubes`. If all colors have
-// fewer cubes in the hand than the amount of cubes in `validCubes`, the hand is
-// valid. Accumulate the sum of Game IDs where all hands are valid.
 
 // #+NAME: part1
 
@@ -97,8 +89,8 @@ function part1(input: string[]): number {
   }, 0)
 }
 
-// console.log(`output sample1 should be 8 === ${part1(sample1)}`)
-// console.log(`output sample1 should be 2617 === ${part1(readData(__dirname))}`)
+console.log(`output sample1 should be 8 === ${part1(sample1)}`)
+console.log(`output sample1 should be 2617 === ${part1(readData(__dirname))}`)
 // part1 ends here
 
 // Part 2
@@ -108,16 +100,14 @@ function part1(input: string[]): number {
 const sample2: string[] = `
 `
   .trim()
-  .split("\n");
+  .split('\n')
 // sample2 ends here
-
-
 
 // #+NAME: part2
 
 // [[file:solution.org::part2][part2]]
 function part2(input: string[]): number {
-  return 0;
+  return 0
 }
 // part2 ends here
 
@@ -125,16 +115,16 @@ function part2(input: string[]): number {
 // #+NAME: tests
 
 // [[file:solution.org::tests][tests]]
-describe(__dirname, () => {
-  const input = readData(__dirname)
+// describe('Day 2', () => {
+//   const input = readData(__dirname)
 
-  test('part 1', () => {
-    expect(part1(sample1)).toBe(8)
-    expect(part1(input)).toBe(2617)
-  })
-})
+//   test('part 1', () => {
+//     expect(part1(sample1)).toBe(8)
+//     expect(part1(input)).toBe(2617)
+//   })
+// })
 
-// describe(__dirname, () => {
+// describe("Day 2", () => {
 // const input = readData(__dirname);
 
 //   test("part 2", () => {

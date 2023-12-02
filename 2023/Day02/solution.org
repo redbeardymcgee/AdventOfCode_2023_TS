@@ -3,20 +3,21 @@
 * Imports
 #+NAME: imports
 #+BEGIN_SRC typescript
-import { readData } from "../utils";
+import { readData } from '../utils'
 #+END_SRC
 
 * Sample Inputs
 #+NAME: sample1
 #+BEGIN_SRC typescript
-const sample1: string[] = `Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
+const sample1: string[] =
+  `Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green
 Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue
 Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
 Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
 Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green
 `
-  .trim()
-  .split("\n");
+    .trim()
+    .split('\n')
 #+END_SRC
 
 * Part 1
@@ -37,7 +38,7 @@ from the bag (like 3 red, 5 green, 4 blue).
 
 In the example above, games 1, 2, and 5 would have been possible if the bag had
 been loaded with that configuration. However, game 3 would have been impossible
-because at one point the Elf showed you 20 red cubes at once; similarly, game 4
+because at one point the Elf showed you 20 red cubes at once similarly, game 4
 would also have been impossible because the Elf showed you 15 blue cubes at
 once. If you add up the IDs of the games that would have been possible, you
 get 8.
@@ -96,8 +97,8 @@ function part1(input: string[]): number {
   }, 0)
 }
 
-// console.log(`output sample1 should be 8 === ${part1(sample1)}`)
-// console.log(`output sample1 should be 2617 === ${part1(readData(__dirname))}`)
+console.log(`output sample1 should be 8 === ${part1(sample1)}`)
+console.log(`output sample1 should be 2617 === ${part1(readData(__dirname))}`)
 #+END_SRC
 
 * Part 2
@@ -106,29 +107,29 @@ function part1(input: string[]): number {
 const sample2: string[] = `
 `
   .trim()
-  .split("\n");
+  .split('\n')
 #+END_SRC
 
 #+NAME: part2
 #+BEGIN_SRC typescript
 function part2(input: string[]): number {
-  return 0;
+  return 0
 }
 #+END_SRC
 
 * Tests
 #+NAME: tests
 #+BEGIN_SRC typescript
-describe(__dirname, () => {
-  const input = readData(__dirname)
+// describe('Day 2', () => {
+//   const input = readData(__dirname)
 
-  test('part 1', () => {
-    expect(part1(sample1)).toBe(8)
-    expect(part1(input)).toBe(2617)
-  })
-})
+//   test('part 1', () => {
+//     expect(part1(sample1)).toBe(8)
+//     expect(part1(input)).toBe(2617)
+//   })
+// })
 
-// describe(__dirname, () => {
+// describe("Day 2", () => {
 // const input = readData(__dirname);
 
 //   test("part 2", () => {
