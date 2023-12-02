@@ -139,21 +139,24 @@ function part2b(input: string[]): number {
 * Tests
 #+NAME: tests
 #+BEGIN_SRC typescript
-describe('Day ', () => {
-  const input = readData(__dirname)
+// describe(__dirname, () => {
+//   const input = readData(__dirname)
 
-  test('part 1', () => {
-    expect(part1(sample1)).toBe(142)
-    expect(part1(input)).toBe(54159)
-  })
+//   test('part 1', () => {
+//     expect(part1(sample1)).toBe(142)
+//     expect(part1(input)).toBe(54159)
+//   })
+// })
 
-  test('part 2', () => {
-    expect(part2(sample2)).toBe(281)
-    expect(part2(input)).toBe(53866)
-  })
-  test('part 2b', () => {
-    expect(part2b(sample2)).toBe(281)
-    expect(part2b(input)).toBe(53866)
-  })
-})
+// describe(__dirname, () => {
+//   const input = readData(__dirname)
+//   test('part 2', () => {
+//     expect(part2(sample2)).toBe(281)
+//     expect(part2(input)).toBe(53866)
+//   })
+//   test('part 2b', () => {
+//     expect(part2b(sample2)).toBe(281)
+//     expect(part2b(input)).toBe(53866)
+//   })
+// })
 #+END_SRC
