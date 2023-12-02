@@ -43,6 +43,15 @@ once. If you add up the IDs of the games that would have been possible, you
 get 8.
 #+END_QUOTE
 
+I spent an embarrassing amount of time morping this input from lines to an
+object, where each Game ID is a key whose value is an array of rounds keyed by
+the cube colors.
+
+Traverse the Games object. In each Game, check for valid hands by comparing the
+amount of each color against the amount of in `validCubes`. If all colors have
+fewer cubes in the hand than the amount of cubes in `validCubes`, the hand is
+valid. Accumulate the sum of Game IDs where all hands are valid.
+
 #+NAME: part1
 #+BEGIN_SRC typescript
 const validCubes = {
