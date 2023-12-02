@@ -81,8 +81,8 @@ function part2(input: string[]): number {
     ['nine', '9'],
     ['zero', '0'],
   ])
-  const forward = /\d|one|two|three|four|five|six|seven|eight|nine|zero/
-  const reverse = /\d|eno|owt|eerht|ruof|evif|xis|neves|thgie|enin|orez/
+  const forward = /\d|one|two|three|four|five|six|seven|eight|nine/
+  const reverse = /\d|eno|owt|eerht|ruof|evif|xis|neves|thgie|enin/
 
   return input.reduce((sum, line) => {
     const fst = line.match(forward).at(0)
@@ -96,12 +96,55 @@ function part2(input: string[]): number {
       .reverse()
       .join('')
     const nums = [fst, snd].map((num) => {
-      return /\d/.test(num) ? num : numbers.get(num)
+      return isNaN(Number(num)) ? numbers.get(num) : num
     })
     return sum + Number(nums.join(''))
   }, 0)
 }
 // part2 ends here
+
+
+
+// A more robust approach might match each successive substring of each line,
+// chopping off the first character on each iteration. `twone` would match `two`
+// then `wone` would match nothing, then `one` would match `one`.
+
+// I don't like to work this way, but I think it succeeds on more inputs. It is
+// also an incredibly slow algorithm.
+
+// #+NAME: part2b
+
+// [[file:solution.org::part2b][part2b]]
+function part2b(input: string[]): number {
+  const numbers = new Map([
+    ['one', '1'],
+    ['two', '2'],
+    ['three', '3'],
+    ['four', '4'],
+    ['five', '5'],
+    ['six', '6'],
+    ['seven', '7'],
+    ['eight', '8'],
+    ['nine', '9'],
+    ['zero', '0'],
+  ])
+  return input.reduce((sum, line) => {
+    let matches = []
+    for (let idx = 0; idx < line.length; idx++) {
+      if (/\d/.test(line.at(idx))) {
+        matches.push(line.charAt(idx))
+        continue
+      }
+      for (const pair of numbers) {
+        if (line.substring(idx).startsWith(pair.at(0))) {
+          matches.push(numbers.get(pair.at(0)))
+        }
+      }
+    }
+    return sum + Number(matches.at(0) + matches.at(-1))
+  }, 0)
+}
+// part2b ends here
 
 // Tests
 // #+NAME: tests
@@ -118,6 +161,10 @@ describe('Day ', () => {
   test('part 2', () => {
     expect(part2(sample2)).toBe(281)
     expect(part2(input)).toBe(53866)
+  })
+  test('part 2b', () => {
+    expect(part2b(sample2)).toBe(281)
+    expect(part2b(input)).toBe(53866)
   })
 })
 // tests ends here
