@@ -3,7 +3,7 @@
 * Imports
 #+NAME: imports
 #+BEGIN_SRC typescript
-import { readData } from '../utils';
+import { readData } from '../utils'
 #+END_SRC
 
 * Sample Inputs
@@ -12,7 +12,7 @@ import { readData } from '../utils';
 const sample1: string[] = `
 `
   .trim()
-  .split('\n');
+  .split('\n')
 #+END_SRC
 
 #+NAME: sample2
@@ -20,14 +20,14 @@ const sample1: string[] = `
 const sample2: string[] = `
 `
   .trim()
-  .split('\n');
+  .split('\n')
 #+END_SRC
 
 * Part 1
 #+NAME: part1
 #+BEGIN_SRC typescript
 function part1(input: string[]): number {
-  return 0;
+  return 0
 }
 #+END_SRC
 
@@ -35,7 +35,7 @@ function part1(input: string[]): number {
 #+NAME: part2
 #+BEGIN_SRC typescript
 function part2(input: string[]): number {
-  return 0;
+  return 0
 }
 #+END_SRC
 
@@ -43,16 +43,16 @@ function part2(input: string[]): number {
 #+NAME: tests
 #+BEGIN_SRC typescript
 describe(__dirname, () => {
-  const input = readData(__dirname);
+  const input = readData(__dirname)
 
   test('part 1', () => {
-    expect(part1(sample1)).toBe(0);
-    expect(part1(input)).toBe(0);
-  });
+    expect(part1(sample1)).toBe(0)
+    expect(part1(input)).toBe(0)
+  })
 
   test('part 2', () => {
-    expect(part2(sample2)).toBe(0);
-    expect(part2(input)).toBe(0);
-  });
-});
+    expect(part2(sample2)).toBe(0)
+    expect(part2(input)).toBe(0)
+  })
+})
 #+END_SRC
