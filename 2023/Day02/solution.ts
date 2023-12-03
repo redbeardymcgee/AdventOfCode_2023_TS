@@ -5,6 +5,13 @@
 import { readData } from '../utils'
 // imports ends here
 
+// Types
+// #+NAME: types
+
+// [[file:solution.org::types][types]]
+type Hand = { blue: number; red: number; green: number }
+// types ends here
+
 // Sample Inputs
 // #+NAME: sample1
 
@@ -38,11 +45,20 @@ Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green
 
 // In the example above, games 1, 2, and 5 would have been possible if the bag had
 // been loaded with that configuration. However, game 3 would have been impossible
-// because at one point the Elf showed you 20 red cubes at once; similarly, game 4
+// because at one point the Elf showed you 20 red cubes at once similarly, game 4
 // would also have been impossible because the Elf showed you 15 blue cubes at
 // once. If you add up the IDs of the games that would have been possible, you
 // get 8.
 // #+END_QUOTE
+
+// I spent an embarrassing amount of time morping this input from lines to an
+// object, where each Game ID is a key whose value is an array of rounds keyed by
+// the cube colors.
+
+// Traverse the Games object. In each Game, check for valid hands by comparing the
+// amount of each color against the amount of in `validCubes`. If all colors have
+// fewer cubes in the hand than the amount of cubes in `validCubes`, the hand is
+// valid. Accumulate the sum of Game IDs where all hands are valid.
 
 // #+NAME: part1
 
@@ -62,9 +78,10 @@ function parse(input: string[]) {
           .trim()
           .split(',')
           .map((cube) => cube.trim().split(' '))
-          .reduce((acc, [amount, color]) => {
-            return { ...acc, [color]: Number(amount) }
-          }, {}),
+          .reduce(
+            (acc, [amount, color]) => ({ ...acc, [color]: Number(amount) }),
+            { blue: 0, red: 0, green: 0 },
+          ),
       )
       return [gameId.split(' ').at(1), rounds]
     })
@@ -89,47 +106,62 @@ function part1(input: string[]): number {
   }, 0)
 }
 
-console.log(`output sample1 should be 8 === ${part1(sample1)}`)
-console.log(`output sample1 should be 2617 === ${part1(readData(__dirname))}`)
+// console.log(`output sample1 should be 8 === ${part1(sample1)}`)
+// console.log(`output sample1 should be 2617 === ${part1(readData(__dirname))}`)
 // part1 ends here
 
 // Part 2
 // #+NAME: sample2
 
 // [[file:solution.org::sample2][sample2]]
-const sample2: string[] = `
-`
-  .trim()
-  .split('\n')
+const sample2: string[] = sample1
 // sample2 ends here
 
 // #+NAME: part2
 
 // [[file:solution.org::part2][part2]]
 function part2(input: string[]): number {
-  return 0
+  const totals = Object.values(parse(input)).map((game) =>
+    (game as []).reduce(
+      (acc, hand: Hand) => {
+        return {
+          blue: Math.max(acc.blue, hand.blue),
+          red: Math.max(acc.red, hand.red),
+          green: Math.max(acc.green, hand.green),
+        }
+      },
+      { blue: 0, red: 0, green: 0 },
+    ),
+  )
+  return [...totals].reduce(
+    (acc, val) => acc + val.blue * val.red * val.green,
+    0,
+  )
 }
+
+// console.log(`sample input part 2 should be 2286 ===`, part2(sample2))
+// console.log(`real input part 2 should be 59795 ===`, part2(readData(__dirname)))
 // part2 ends here
 
 // Tests
 // #+NAME: tests
 
 // [[file:solution.org::tests][tests]]
-// describe('Day 2', () => {
-//   const input = readData(__dirname)
+describe('Day 2', () => {
+  const input = readData(__dirname)
 
-//   test('part 1', () => {
-//     expect(part1(sample1)).toBe(8)
-//     expect(part1(input)).toBe(2617)
-//   })
-// })
+  test('part 1', () => {
+    expect(part1(sample1)).toBe(8)
+    expect(part1(input)).toBe(2617)
+  })
+})
 
-// describe("Day 2", () => {
-// const input = readData(__dirname);
+describe('Day 2', () => {
+  const input = readData(__dirname)
 
-//   test("part 2", () => {
-//     expect(part2(sample2)).toBe(0);
-//     expect(part2(input)).toBe(0);
-//   });
-// });
+  test('part 2', () => {
+    expect(part2(sample2)).toBe(2286)
+    expect(part2(input)).toBe(59795)
+  })
+})
 // tests ends here
