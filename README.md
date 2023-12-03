@@ -14,8 +14,18 @@ instructions by replacing `2023/Day01` with the correct year and day:
 3. Add your solution for part 1 to `2023/Day01/solution.org`
 4. `org-babel-tangle` the file to output `2023/Day01/solution.ts`
 5. Submit the correct answer for part 1 to [AoC]
-6. Repeat steps 2 through 4 for part 2
+6. Repeat steps 3 through 5 for part 2
 7. Enjoy!
+
+### Note
+The template `solution.org` file has been configured with the property
+`:comments both` which allows `org-babel-detangle` from `Day/XX/solution.ts` to
+update `Day/XX/solution.org`. I called this bi-directional tangling. I don't
+know if Emacs or Org people have a better name for that.
+
+Change or remove `:comments both` to disable this behavior, then `C-c C-c` on
+the first line of `solution.org`. When you next tangle it into `solution.ts`,
+the comments and position markers used for the detangling process will be gone.
 
 ## Setup
 
