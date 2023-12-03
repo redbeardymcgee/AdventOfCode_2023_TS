@@ -6,6 +6,12 @@
 import { readData } from '../utils'
 #+END_SRC
 
+* Types
+#+NAME: types
+#+BEGIN_SRC typescript
+
+#+END_SRC
+
 * Sample Inputs
 #+NAME: sample1
 #+BEGIN_SRC typescript
