@@ -93,13 +93,10 @@ function part1(input: string[]): number {
     const id = Number(val.at(0))
     const hands: any = val.at(1)
     const valid = hands.filter((hand: any) => {
-      const red = hand.red ?? 0
-      const blue = hand.blue ?? 0
-      const green = hand.green ?? 0
       return [
-        red <= validCubes.red,
-        blue <= validCubes.blue,
-        green <= validCubes.green,
+        hand.red <= validCubes.red,
+        hand.blue <= validCubes.blue,
+        hand.green <= validCubes.green,
       ].every(Boolean)
     })
     return hands.length === valid.length ? acc + id : acc
@@ -116,6 +113,8 @@ function part1(input: string[]): number {
 // [[file:solution.org::sample2][sample2]]
 const sample2: string[] = sample1
 // sample2 ends here
+
+
 
 // #+NAME: part2
 

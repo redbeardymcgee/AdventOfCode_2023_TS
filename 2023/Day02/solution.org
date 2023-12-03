@@ -91,13 +91,10 @@ function part1(input: string[]): number {
     const id = Number(val.at(0))
     const hands: any = val.at(1)
     const valid = hands.filter((hand: any) => {
-      const red = hand.red ?? 0
-      const blue = hand.blue ?? 0
-      const green = hand.green ?? 0
       return [
-        red <= validCubes.red,
-        blue <= validCubes.blue,
-        green <= validCubes.green,
+        hand.red <= validCubes.red,
+        hand.blue <= validCubes.blue,
+        hand.green <= validCubes.green,
       ].every(Boolean)
     })
     return hands.length === valid.length ? acc + id : acc
@@ -116,10 +113,8 @@ const sample2: string[] = sample1
 
 #+NAME: part2
 #+BEGIN_SRC typescript
-
 function part2(input: string[]): number {
-  const games = Object.values(parse(input))
-  const totals = games.map((game) =>
+  const totals = Object.values(parse(input)).map((game) =>
     (game as []).reduce(
       (acc, hand: Hand) => {
         return {
@@ -131,11 +126,10 @@ function part2(input: string[]): number {
       { blue: 0, red: 0, green: 0 },
     ),
   )
-  const result = [...totals].reduce(
+  return [...totals].reduce(
     (acc, val) => acc + val.blue * val.red * val.green,
     0,
   )
-  return result
 }
 
 // console.log(`sample input part 2 should be 2286 ===`, part2(sample2))
