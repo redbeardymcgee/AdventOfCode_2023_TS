@@ -71,13 +71,13 @@ const validCubes = {
 
 function parse(input: string[]) {
   return input
-    .map((game) => {
+    .map(game => {
       const [gameId, match] = game.split(':')
-      const rounds = match.split(';').map((round) =>
+      const rounds = match.split(';').map(round =>
         round
           .trim()
           .split(',')
-          .map((cube) => cube.trim().split(' '))
+          .map(cube => cube.trim().split(' '))
           .reduce(
             (acc, [amount, color]) => ({ ...acc, [color]: Number(amount) }),
             { blue: 0, red: 0, green: 0 },
@@ -114,13 +114,11 @@ function part1(input: string[]): number {
 const sample2: string[] = sample1
 // sample2 ends here
 
-
-
 // #+NAME: part2
 
 // [[file:solution.org::part2][part2]]
 function part2(input: string[]): number {
-  const totals = Object.values(parse(input)).map((game) =>
+  const totals = Object.values(parse(input)).map(game =>
     (game as []).reduce(
       (acc, hand: Hand) => {
         return {

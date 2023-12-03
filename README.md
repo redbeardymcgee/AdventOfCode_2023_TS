@@ -18,6 +18,7 @@ instructions by replacing `2023/Day01` with the correct year and day:
 7. Enjoy!
 
 ### Note
+
 The template `solution.org` file has been configured with the property
 `:comments both` which allows `org-babel-detangle` from `Day/XX/solution.ts` to
 update `Day/XX/solution.org`. I called this bi-directional tangling. I don't

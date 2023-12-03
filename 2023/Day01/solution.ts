@@ -18,8 +18,6 @@ treb7uchet
   .split('\n')
 // sample1 ends here
 
-
-
 // #+NAME: sample2
 
 // [[file:solution.org::sample2][sample2]]
@@ -46,7 +44,7 @@ zoneight234
 // [[file:solution.org::part1][part1]]
 function part1(input: string[]): number {
   return input.reduce((sum, line) => {
-    const digits = line.split('').filter((c) => /\d/.test(c))
+    const digits = line.split('').filter(c => /\d/.test(c))
     return sum + Number(digits[0] + digits.at(-1))
   }, 0)
 }
@@ -94,15 +92,13 @@ function part2(input: string[]): number {
       .split('')
       .reverse()
       .join('')
-    const nums = [fst, snd].map((num) => {
+    const nums = [fst, snd].map(num => {
       return isNaN(Number(num)) ? numbers.get(num) : num
     })
     return sum + Number(nums.join(''))
   }, 0)
 }
 // part2 ends here
-
-
 
 // A more robust approach might match each successive substring of each line,
 // chopping off the first character on each iteration. `twone` would match `two`
