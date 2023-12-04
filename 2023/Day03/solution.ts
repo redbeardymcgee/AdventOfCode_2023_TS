@@ -130,12 +130,14 @@ function part1(input: string[]): number {
     for (let coord of set) {
       let [x, y] = JSON.parse(coord)
       const line = grid[y]
-      // const char = line[x]
+      const char = line[x]
       // console.log(`=========`)
-      // console.log(`This line is: ${JSON.stringify(line)}`)
-      // console.log(`'${coord}' === [${[x, y]}] is ${char} in ${line}`)
+      // console.log(line)
+      // console.log(`This line is: [${line.join(',')}]`)
+      // const foobar = line.slice(0, x) + `[${char}]` + line.slice(x)
+      // console.log(`'${coord}' === [${[x, y]}] is ${char} in ${foobar}`)
       let num = ``
-      for (let i = x; i < line.slice(x).length - 1+ x; i++) {
+      for (let i = x; i < line.slice(x).length + x; i++) {
         const c = line[i]
         if (!/\d/.test(c)) {
           // console.log(`NOT DIGIT is ${c} AT POS [${i}, ${y}]`)
@@ -145,15 +147,19 @@ function part1(input: string[]): number {
         num += `${c}`
       }
       // console.log(`=========`)
+      // console.log(num)
       // console.log(`---------`)
       numbers.push(Number(num))
     }
   }
-  console.log(`Collected Part Numbers === ${numbers}`)
+  // console.log(`Collected Part Numbers vvv`)
+  // numbers.map(n => console.log(n))
+  // console.log(`Collected Part Numbers ^^^`)
+  // console.log(`length of collection === ${numbers.length}`)
   return numbers.reduce((sum, n) => sum + n, 0)
 }
 
-console.log(`Sample 1 Answer should be 4361 === ${part1(sample1)}`)
+// console.log(`Sample 1 Answer should be 4361 === ${part1(sample1)}`)
 console.log(`Input 1 Answer should be ???? === ${part1(readData(__dirname))}`)
 
 // Part 1:1 ends here
