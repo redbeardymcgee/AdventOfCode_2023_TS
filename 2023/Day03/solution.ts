@@ -91,31 +91,71 @@ const NEIGHBORS = [
 ]
 
 function part1(input: string[]): number {
-  const exploded = input.map(l => l.split(''))
-  const collection = []
-  const checkSquare = (x, y, arr) => {
-    NEIGHBORS.forEach(pos => {
-      const numPosX = x + pos.at(0)
-      const numPosY = y + pos.at(1)
-      if (numPosX < 0 || numPosX >= arr[0].length) return
-      if (numPosY < 0 || numPosY >= arr.length) return
-      const fooPos = arr.at(numPosX).at(numPosY)
-      if (/\d/.test(fooPos)) {
-        console.log(fooPos)
-        collection.push([numPosX, numPosY])
+  const grid = input.map(l => l.split(''))
+  const copy = [...grid]
+
+  const findStart = ([x, y]) => {
+    const line = copy.at(y)
+    let leftCoord = [x, y]
+
+    for (let i = x; i >= 0; i--) {
+      const char = line.at(i)
+      if (!/\d/.test(char)) {
+        break
+      }
+      leftCoord = [i, y]
+    }
+    return leftCoord
+  }
+
+  const findPositions = (x, y) => {
+    const positions = new Set()
+    NEIGHBORS.forEach(([x1, y1]) => {
+      const posX = x + x1
+      const posY = y + y1
+      if (posX < 0 || posX >= grid[0].length) return
+      if (posY < 0 || posY >= grid.length) return
+      const line = grid.at(posY).join('')
+      const char = line.at(posX)
+      if (/\d/.test(char)) {
+        const startPos = findStart([posX, posY])
+        positions.add(JSON.stringify(startPos))
       }
     })
+    return positions
   }
-  exploded.forEach((l, x, arr) => {
-    l.forEach((c, y) => {
-      if (SYMBOLS_RE.test(c)) checkSquare(x, y, arr)
-    })
-  })
-  console.log(`collected ===`, collection)
-  return 0
-}
 
-console.log(part1(sample1))
+  let coords = []
+  for (let y = 0; y < grid.length; y++) {
+    for (let x = 0; x < grid[0].length; x++) {
+      let line = grid[y]
+      let char = line[x]
+      if (!/\d|\./.test(char)) {
+        coords.push(findPositions(x, y))
+      }
+    }
+  }
+
+  let numbers = []
+  for (let i = 0; i < coords.length; i++) {
+    let set = coords[i].values()
+    for (let coord of set) {
+      let [x, y] = JSON.parse(coord)
+      const line = grid[y]
+      const char = line[x]
+      let num = ``
+      for (let i = x; i < line.slice(x).length + x; i++) {
+        const c = line[i]
+        if (!/\d/.test(c)) {
+          break
+        }
+        num += `${c}`
+      }
+      numbers.push(Number(num))
+    }
+  }
+  return numbers.reduce((sum, n) => sum + n, 0)
+}
 // Part 1:1 ends here
 
 // Part 2
@@ -226,17 +266,17 @@ function part2(input: string[]): number {
 // #+NAME: tests
 
 // [[file:solution.org::tests][tests]]
-// describe(__dirname, () => {
-//   const input = readData(__dirname)
+describe(__dirname, () => {
+  const input = readData(__dirname)
 
-//   test('part 1', () => {
-//     expect(part1(sample1)).toBe(4361)
-//     expect(part1(input)).toBe(0)
-//   })
+  test('part 1', () => {
+    expect(part1(sample1)).toBe(4361)
+    expect(part1(input)).toBe(514969)
+  })
 
-//   test('part 2', () => {
-//     expect(part2(sample2)).toBe(0)
-//     expect(part2(input)).toBe(0)
-//   })
-// })
+  test('part 2', () => {
+    expect(part2(sample2)).toBe(467835)
+    expect(part2(input)).toBe(78915902)
+  })
+})
 // tests ends here
