@@ -92,10 +92,9 @@ const NEIGHBORS = [
 
 function part1(input: string[]): number {
   const grid = input.map(l => l.split(''))
-  const copy = [...grid]
 
   const findStart = ([x, y]) => {
-    const line = copy.at(y)
+    const line = grid.at(y)
     let leftCoord = [x, y]
 
     for (let i = x; i >= 0; i--) {
