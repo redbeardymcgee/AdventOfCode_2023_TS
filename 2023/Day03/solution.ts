@@ -67,7 +67,7 @@ const sample2: string[] = sample1
 // Finally, sum the values in the Set together.
 
 // [[file:solution.org::*Part 1][Part 1:1]]
-const SURROUNDING = [
+const NEIGHBORS = [
   [-1, 1],
   [-1, 0],
   [-1, -1],
@@ -79,37 +79,83 @@ const SURROUNDING = [
 ]
 
 function part1(input: string[]): number {
-  const exploded = input.map(l => l.split(''))
-  const collection = []
-  const checkSquare = (x, y, arr) => {
-    SURROUNDING.forEach(pos => {
-      const numPosX = x + pos.at(0)
-      const numPosY = y + pos.at(1)
-      if (numPosX < 0 || numPosX >= arr[0].length) return
-      if (numPosY < 0 || numPosY >= arr.length) return
-      const fooPos = arr.at(numPosX).at(numPosY)
-      if (/\d/.test(fooPos)) {
-        // console.log(fooPos, `[${numPosY}, ${numPosX}]`)
-        collection.push([numPosX, numPosY])
+  const grid = input.map(l => l.split(''))
+  const copy = [...grid]
+
+  const findStart = ([x, y]) => {
+    const line = copy.at(y)
+    let leftCoord = [x, y]
+
+    for (let i = x; i >= 0; i--) {
+      const char = line.at(i)
+      if (!/\d/.test(char)) {
+        break
       }
-    })
+      leftCoord = [i, y]
+    }
+    return leftCoord
   }
-  exploded.forEach((line, xPos, arr) => {
-    line.forEach((char, yPos) => {
-      if (char !== '.') {
-        if (!/\d|\./.test(char)) {
-          console.log(`${char}, [${xPos}, ${yPos}]`)
-          checkSquare(xPos, yPos, arr)
-        }
+
+  const findPositions = (x, y) => {
+    const positions = new Set()
+    NEIGHBORS.forEach(([x1, y1]) => {
+      const posX = x + x1
+      const posY = y + y1
+      if (posX < 0 || posX >= grid[0].length) return
+      if (posY < 0 || posY >= grid.length) return
+      const line = grid.at(posY).join('')
+      const char = line.at(posX)
+      if (/\d/.test(char)) {
+        const startPos = findStart([posX, posY])
+        positions.add(JSON.stringify(startPos))
       }
     })
-  })
-  // [[2,0], [2,-2], [3, -2]]
-  // console.log(`collected ===`, collection)
-  return 0
+    return positions
+  }
+
+  let coords = []
+  for (let y = 0; y < grid.length; y++) {
+    for (let x = 0; x < grid[0].length; x++) {
+      let line = grid[y]
+      let char = line[x]
+      if (!/\d|\./.test(char)) {
+        coords.push(findPositions(x, y))
+      }
+    }
+  }
+
+  let numbers = []
+  for (let i = 0; i < coords.length; i++) {
+    let set = coords[i].values()
+    for (let coord of set) {
+      let [x, y] = JSON.parse(coord)
+      const line = grid[y]
+      // const char = line[x]
+      // console.log(`=========`)
+      // console.log(`This line is: ${JSON.stringify(line)}`)
+      // console.log(`'${coord}' === [${[x, y]}] is ${char} in ${line}`)
+      let num = ``
+      for (let i = x; i < line.slice(x).length - 1+ x; i++) {
+        const c = line[i]
+        if (!/\d/.test(c)) {
+          // console.log(`NOT DIGIT is ${c} AT POS [${i}, ${y}]`)
+          break
+        }
+        // console.log(`DIGIT is ${c} AT POS [${i}, ${y}]`)
+        num += `${c}`
+      }
+      // console.log(`=========`)
+      // console.log(`---------`)
+      numbers.push(Number(num))
+    }
+  }
+  console.log(`Collected Part Numbers === ${numbers}`)
+  return numbers.reduce((sum, n) => sum + n, 0)
 }
 
-console.log(part1(sample1))
+console.log(`Sample 1 Answer should be 4361 === ${part1(sample1)}`)
+console.log(`Input 1 Answer should be ???? === ${part1(readData(__dirname))}`)
+
 // Part 1:1 ends here
 
 // Part 2
@@ -131,7 +177,7 @@ function part2(input: string[]): number {
 //   test('part 1', () => {
 //     expect(part1(sample1)).toBe(4361)
 //     expect(part1(input)).toBe(0)
-//   })
+// })
 
 //   test('part 2', () => {
 //     expect(part2(sample2)).toBe(0)
