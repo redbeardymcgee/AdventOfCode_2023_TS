@@ -35,7 +35,7 @@ const sample2: string[] = sample1
 #+NAME: part1
 #+BEGIN_SRC typescript
 function part1(input: string[]): number {
-  console.log(sample1)
+  console.log(input)
   return 0
 }
 

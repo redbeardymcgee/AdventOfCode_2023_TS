@@ -38,21 +38,45 @@ const sample2: string[] = sample1
 
 // [[file:solution.org::part1][part1]]
 function part1(input: string[]): number {
-  console.log(sample1)
-  return 0
+  const cards = input.map(line => line.trim())
+  return cards.reduce((sum, card) => {
+    const [_, hand] = card.split(':').map(parts => parts.trim())
+    const [winners, mine] = hand
+      .split('|')
+      .map(nums => nums.trim())
+      .map(nums => nums.split(' ').filter(num => num !== ''))
+    const baz = mine.filter(v => winners.includes(v))
+    if (baz.length <= 0) return sum
+    const foo = 2**(baz.length-1)
+    return sum + foo
+  }, 0)
 }
 
-console.log(part1(sample1))
-// console.log(part1(readData(__dirname)))
+console.log(`lkasjdlfkjaslkdjf`, part1(sample1))
+console.log(part1(readData(__dirname)))
 // part1 ends here
 
 // Part 2
 // #+NAME: part2
 
+// function part2(input: string[]): number {
+//   const cards = input.map(line => line.trim())
+//   return cards.reduce((sum, card) => {
+//     const [_, hand] = card.split(':').map(parts => parts.trim())
+//     const [winners, mine] = hand
+//       .split('|')
+//       .map(nums => nums.trim())
+//       .map(nums => nums.split(' ').filter(num => num !== ''))
+//     const baz = mine.filter(v => winners.includes(v))
+//     if (baz.length <= 0) return sum
+//     return sum
+//   }, 0)
+// }
+
+// console.log(`should be 30`, part2(sample2))
+// console.log(part2(readData(__dirname)))
 // [[file:solution.org::part2][part2]]
-function part2(input: string[]): number {
-  return 0
-}
+
 // console.log(part2(sample2))
 // console.log(part2(readData(__dirname)))
 // part2 ends here
