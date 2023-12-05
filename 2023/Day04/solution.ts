@@ -46,39 +46,50 @@ function part1(input: string[]): number {
       .map(nums => nums.trim())
       .map(nums => nums.split(' ').filter(num => num !== ''))
     const baz = mine.filter(v => winners.includes(v))
-    if (baz.length <= 0) return sum
-    const foo = 2**(baz.length-1)
-    return sum + foo
+    return baz.length > 0 ? sum + 2 ** (baz.length - 1) : sum
   }, 0)
 }
-
-console.log(`lkasjdlfkjaslkdjf`, part1(sample1))
-console.log(part1(readData(__dirname)))
+// console.log(part1(sample1))
+// console.log(part1(readData(__dirname)))
 // part1 ends here
 
 // Part 2
 // #+NAME: part2
 
-// function part2(input: string[]): number {
-//   const cards = input.map(line => line.trim())
-//   return cards.reduce((sum, card) => {
-//     const [_, hand] = card.split(':').map(parts => parts.trim())
-//     const [winners, mine] = hand
-//       .split('|')
-//       .map(nums => nums.trim())
-//       .map(nums => nums.split(' ').filter(num => num !== ''))
-//     const baz = mine.filter(v => winners.includes(v))
-//     if (baz.length <= 0) return sum
-//     return sum
-//   }, 0)
-// }
-
-// console.log(`should be 30`, part2(sample2))
-// console.log(part2(readData(__dirname)))
 // [[file:solution.org::part2][part2]]
+function part2(input: string[]): number {
+  const cards = input.map(line => line.trim())
+  let stupid = {}
+  for (let i = 0; i < cards.length; i++) {
+    stupid = { ...stupid, [i]: 1 }
+  }
+  const foo = cards.reduce((acc, card, idx) => {
+    const [_, hand] = card.split(':').map(parts => parts.trim())
+    const [winners, mine] = hand
+      .split('|')
+      .map(nums => nums.trim())
+      .map(nums => nums.split(' ').filter(num => num !== ''))
+    const matches = mine.filter(v => winners.includes(v))
 
-// console.log(part2(sample2))
-// console.log(part2(readData(__dirname)))
+    for (let baz = 0; baz < acc[idx] ?? 1; baz++) {
+      for (let i = 1; i <= matches.length; i++) {
+        const val = acc[idx + i] ?? 1
+        acc[idx + i] = val + 1
+      }
+    }
+
+    return acc
+  }, stupid)
+  console.log(foo)
+  const result = Object.values(foo).reduce(
+    (sum: number, val: number) => sum + val,
+    0,
+  ) as number
+  return result
+}
+
+console.log(part2(sample2))
+console.log(part2(readData(__dirname)))
 // part2 ends here
 
 // Tests
@@ -90,12 +101,12 @@ console.log(part1(readData(__dirname)))
 
 //   test('part 1', () => {
 //     expect(part1(sample1)).toBe(13)
-//     expect(part1(input)).toBe(0)
+//     expect(part1(input)).toBe(20855)
 //   })
 
 //   test('part 2', () => {
-//     expect(part2(sample2)).toBe(0)
-//     expect(part2(input)).toBe(0)
+//     expect(part2(sample2)).toBe(30)
+//     expect(part2(input)).toBe(5489600)
 //   })
 // })
 // tests ends here
