@@ -15,5 +15,5 @@ package-lock.json
 
 .npm
 
-# Stores VSCode versions used for testing VSCode extensions
-.vscode-test
+input
+input.txt
