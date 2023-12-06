@@ -36,3 +36,7 @@ Make sure to have a recent NodeJs version installed (version 16 or higher), and 
 # Command line execution
 
 Running `npm test` will execute all the existing tests.
+
+
+[Advent of Code]: https://adventofcode.com/
+[AoC]: https://adventofcode.com/
