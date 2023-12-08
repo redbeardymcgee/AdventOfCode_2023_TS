@@ -37,15 +37,13 @@ function parse(input: string[]): Race[] {
   const races = input.map(line => line.split(':').map(part => part.trim()))
   const times = races[0][1]
     .split(' ')
-    .map(time => time.trim())
     .filter(Boolean)
-    .map(time => Number(time))
+    .map(time => Number(time.trim()))
   const dist = races[1][1]
     .split(' ')
-    .map(dist => dist.trim())
     .filter(Boolean)
-    .map(time => Number(time))
-  return times.map((_, idx) => ({ time: times[idx], distance: dist[idx] }))
+    .map(dist => Number(dist.trim()))
+  return times.map((time, idx) => ({ time, distance: dist[idx] }))
 }
 
 function runRace(race: Race): number[] {
