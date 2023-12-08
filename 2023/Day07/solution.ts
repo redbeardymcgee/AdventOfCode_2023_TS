@@ -16,8 +16,8 @@ const HandType = {
   OnePair: 1,
   TwoPair: 2,
   ThreeOfAKind: 3,
-  FourOfAKind: 4,
-  FullHouse: 5,
+  FullHouse: 4,
+  FourOfAKind: 5,
   FiveOfAKind: 6,
 } as const
 
@@ -168,7 +168,7 @@ function scoreSort(a, b): number {
 
 function part1(input: string[]): number {
   const hands = parse(input) as Hand[]
-  const handsByScore = hands
+  const handsByRank = hands
     .map(hand => ({
       cards: hand.cards,
       bid: hand.bid,
@@ -181,9 +181,28 @@ function part1(input: string[]): number {
       score: hand.score,
       rank: idx + 1,
     }))
-  return handsByScore.reduce((sum, hand) => sum + hand.bid * hand.rank, 0)
+
+  handsByRank.map(hand =>
+    console.log(`${hand.hand.join('')} IS SCORE ${hand.score}`),
+  )
+  // console.log(JSON.stringify(handsByRank, null, 2))
+
+  return handsByRank.reduce((sum, hand) => sum + hand.bid * hand.rank, 0)
 }
-console.log(part1(sample1))
+const test = `AAAAK 1
+AAAKA 1
+AAKAA 1
+AKAAA 1
+KAAAA 1
+KKKKA 1
+KKKAK 1
+KKAKK 1
+KAKKK 1
+AKKKK 1`
+  .trim()
+  .split('\n')
+// console.log(part1(sample1))
+// console.log(part1(test))
 console.log(part1(readData(__dirname)))
 // part1 ends here
 
